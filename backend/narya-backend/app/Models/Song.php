@@ -13,7 +13,7 @@ class Song extends Model
     protected $fillable = [
         'user_id',
         'spotify_song_id',
-        'emotion',
+        'mood_id',
     ];
 
     /**
@@ -22,5 +22,13 @@ class Song extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relación con el estado emocional (mood).
+     */
+    public function mood(): BelongsTo
+    {
+        return $this->belongsTo(Mood::class);
     }
 }
