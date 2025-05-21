@@ -18,14 +18,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',  
         'name',
+        'surname',
         'email',
         'password',
+        'birthdate',
+        'profile_picture',
         'spotify_id',
         'spotify_access_token',
         'spotify_refresh_token',
         'spotify_token_expires_at',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
