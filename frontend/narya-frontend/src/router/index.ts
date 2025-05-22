@@ -5,8 +5,23 @@ import TabsPage from '../views/TabsPage.vue';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/tabs/home'
+    redirect: '/welcome'
   },
+  {
+    path: '/welcome',
+    component: () => import('../views/WelcomePage.vue')
+  },
+  
+  // 🔐 Rutas públicas para login y registro
+  {
+    path: '/login',
+    component: () => import('../views/LoginPage.vue')
+  },
+  {
+    path: '/register',
+    component: () => import('../views/RegisterPage.vue')
+  },
+  // 🌟 Estructura principal con Tabs
   {
     path: '/tabs/',
     component: TabsPage,
@@ -38,6 +53,7 @@ const routes: Array<RouteRecordRaw> = [
     ]
   }
 ];
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

@@ -6,7 +6,6 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding tab-bg-home fade-in">
-        <img src="@/assets/Narya-Logo.png" alt="Narya Logo" class="narya-logo" />
         <p>Aquí verás el feed de actividad tuyo y de los usuarios que sigues.</p>
     </ion-content>
   </ion-page>

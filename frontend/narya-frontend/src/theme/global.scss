@@ -1,0 +1,36 @@
+/* Estilo directo al campo de entrada del ion-input */
+ion-input.register-input::part(native) {
+  border-radius: 24px;
+  padding: 14px 18px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+}
+
+/* Centrado del placeholder */
+ion-input.register-input::part(native)::placeholder {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+ion-input.custom-input {
+  --background: rgba(255, 255, 255, 0.08);
+  --color: white;
+  --placeholder-color: rgba(255, 255, 255, 0.5);
+  --highlight-color-focused: var(--narya-neon-pink, #ff5ca2);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --border-radius: 25px;
+
+  border-radius: 25px;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+/* NEÓN: hover y focus que SÍ FUNCIONA */
+ion-input.custom-input:hover,
+ion-input.custom-input:focus-within {
+  box-shadow: 0 0 12px 2px var(--narya-neon-pink, #ff5ca2);
+  background: rgba(255, 92, 162, 0.1);
+}
