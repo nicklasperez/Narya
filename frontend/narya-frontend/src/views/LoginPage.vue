@@ -23,10 +23,13 @@
         </ion-button>
 
         <ion-text color="white" class="redirect-text">
-          ¿No tienes cuenta? --- 
+          ¿No tienes cuenta? ---
           <a @click="goToRegister">Regístrate</a>
         </ion-text>
       </div>
+
+      <!-- Popup de Spotify -->
+      <SpotifyPopup ref="spotifyPopupRef" />
     </ion-content>
   </ion-page>
 </template>
@@ -36,9 +39,11 @@ import { ref } from 'vue';
 import { IonPage, IonContent, IonInput, IonButton, IonText } from '@ionic/vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import SpotifyPopup from '@/components/SpotifyPopup.vue';
 
 const router = useRouter();
 
+const spotifyPopupRef = ref();
 const form = ref({
   email: '',
   password: ''
@@ -48,8 +53,21 @@ async function handleLogin() {
   try {
     const response = await axios.post('http://localhost:8000/api/login', form.value);
     const token = response.data.token;
-
     localStorage.setItem('token', token);
+
+    // Verificar estado del usuario
+    const userRes = await axios.get('http://localhost:8000/api/user', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const user = userRes.data;
+
+    if (!user.spotify_id) {
+      spotifyPopupRef.value.open(); // mostrar popup si no está vinculado
+    }
+
     router.push('/tabs/home');
   } catch (error: any) {
     console.error('Error al iniciar sesión:', error);

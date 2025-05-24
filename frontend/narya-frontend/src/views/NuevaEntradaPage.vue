@@ -5,7 +5,7 @@
         <ion-title>Nueva Entrada</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding tab-bg-nueva fade-in">
+    <ion-content class="ion-padding tab-bg-nueva">
       <p>Agrega una nueva entrada de estado de ánimo + canción.</p>
     </ion-content>
   </ion-page>

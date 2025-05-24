@@ -5,7 +5,7 @@
         <ion-title>Gráficos</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding tab-bg-graficos fade-in">
+    <ion-content class="ion-padding tab-bg-graficos">
       <p>Aquí verás estadísticas: canciones más escuchadas, estados de ánimo dominantes, etc.</p>
     </ion-content>
   </ion-page>

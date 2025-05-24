@@ -4,6 +4,8 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\MoodController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SpotifyAuthController;
+
 
 // Registro y Login (Público)
 Route::post('/register', [AuthController::class, 'register']);
@@ -13,6 +15,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Auth
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Spotify Auth
+    Route::get('/spotify/redirect', [SpotifyAuthController::class, 'redirect']);
+    Route::get('/spotify/callback', [SpotifyAuthController::class, 'callback']);
 
     // Moods
     Route::get('/moods', [MoodController::class, 'index']);
