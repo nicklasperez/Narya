@@ -10,6 +10,9 @@
   --narya-neon-blue: #5cecff;
   --narya-neon-purple: #9c5cff;
   --narya-neon-green: #5cffbe;
+  --narya-neon-orange: #ffb074;
+  --narya-neon-rose: #f876c7;
+  --narya-neon-cyan: #68e8f9;
 }
 
 :root {
@@ -18,16 +21,72 @@
 
 /* Estilos de Neon */
 
-.neon-text {
+.neon-text-pink {
   color: var(--narya-neon-pink);
   text-shadow: 0 0 5px var(--narya-neon-pink), 0 0 10px var(--narya-neon-pink);
 }
 
-.neon-border {
+.neon-border-pink {
   border: 1px solid var(--narya-neon-blue);
   box-shadow: 0 0 10px var(--narya-neon-blue);
   border-radius: 8px;
 }
+
+.neon-text-purple {
+  color: var(--narya-neon-purple);
+  text-shadow: 0 0 5px var(--narya-neon-purple), 0 0 10px var(--narya-neon-purple);
+}
+
+.neon-border-purple {
+  border: 1px solid var(--narya-neon-purple);
+  box-shadow: 0 0 10px var(--narya-neon-purple);
+  border-radius: 8px;
+}
+
+.neon-text-green {
+  color: var(--narya-neon-green);
+  text-shadow: 0 0 5px var(--narya-neon-green), 0 0 10px var(--narya-neon-green);
+}
+
+.neon-border-green {
+  border: 1px solid var(--narya-neon-green);
+  box-shadow: 0 0 10px var(--narya-neon-green);
+  border-radius: 8px;
+}
+
+.neon-text-cyan {
+  color: var(--narya-neon-cyan);
+  text-shadow: 0 0 5px var(--narya-neon-cyan), 0 0 10px var(--narya-neon-cyan);
+}
+
+.neon-border-cyan {
+  border: 1px solid var(--narya-neon-cyan);
+  box-shadow: 0 0 10px var(--narya-neon-cyan);
+  border-radius: 8px;
+}
+
+.neon-text-orange {
+  color: var(--narya-neon-orange);
+  text-shadow: 0 0 5px var(--narya-neon-orange), 0 0 10px var(--narya-neon-orange);
+}
+
+.neon-border-orange {
+  border: 1px solid var(--narya-neon-orange);
+  box-shadow: 0 0 10px var(--narya-neon-orange);
+  border-radius: 8px;
+}
+
+.neon-text-rose {
+  color: var(--narya-neon-rose);
+  text-shadow: 0 0 5px var(--narya-neon-rose), 0 0 10px var(--narya-neon-rose);
+}
+
+.neon-border-rose {
+  border: 1px solid var(--narya-neon-rose);
+  box-shadow: 0 0 10px var(--narya-neon-rose);
+  border-radius: 8px;
+}
+
 
 /* Home Page */
 
@@ -93,14 +152,16 @@
 .tab-bg-ajustes {
   --background: none;
   background:
-    radial-gradient(circle at 40% 50%, rgba(92, 255, 190, 0.18), transparent 55%),
-    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.08), transparent 55%),
-    radial-gradient(circle at 60% 60%, rgba(150, 255, 200, 0.14), transparent 55%);
-  background-color: #1a2521;
+    radial-gradient(circle at 40% 50%, rgba(72, 121, 178, 0.18), transparent 55%),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.05), transparent 55%),
+    radial-gradient(circle at 60% 60%, rgba(55, 105, 168, 0.14), transparent 55%);
+  background-color: #101c2b;
   background-blend-mode: lighter;
   animation: neon-fade 14s ease-in-out infinite alternate;
   transition: background 1s ease-in-out;
 }
+
+
 
 @keyframes neon-fade {
   0% {
@@ -121,9 +182,11 @@
 @keyframes fadeInSmooth {
   from {
     opacity: 0;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 

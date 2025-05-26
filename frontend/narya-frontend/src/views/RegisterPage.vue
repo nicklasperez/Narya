@@ -62,6 +62,9 @@
           <a @click="goToLogin">Iniciar sesión</a>
         </ion-text>
       </div>
+
+      <!-- Popup de Spotify -->
+      <SpotifyPopup ref="spotifyPopupRef" />
     </ion-content>
   </ion-page>
 </template>
@@ -71,8 +74,10 @@ import { ref } from 'vue';
 import { IonPage, IonContent, IonInput, IonButton, IonText } from '@ionic/vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import SpotifyPopup from '@/components/SpotifyPopup.vue';
 
 const router = useRouter();
+const spotifyPopupRef = ref();
 
 const form = ref({
   username: '',
@@ -90,6 +95,19 @@ async function handleRegister() {
     const token = response.data.token;
 
     localStorage.setItem('token', token);
+
+    const userRes = await axios.get('http://localhost:8000/api/user', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    const user = userRes.data;
+
+    if (!user.spotify_id) {
+      spotifyPopupRef.value.open(); // mostrar popup si no está vinculado
+    }
+
     router.push('/tabs/home');
   } catch (error) {
     console.error(error);
@@ -141,14 +159,12 @@ function goToLogin() {
   --border-radius: 25px;
 }
 
-/* Centrar el texto dentro del input */
 ion-input.custom-input::part(native) {
   text-align: center;
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
 }
 
-/* Centrar el placeholder también */
 ion-input.custom-input::part(native)::placeholder {
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
@@ -169,7 +185,8 @@ ion-input.custom-input::part(native)::placeholder {
 
 .redirect-text a {
   color: var(--narya-neon-pink, #ff5ca2);
-  
+  text-decoration: underline;
   cursor: pointer;
 }
 </style>
+
