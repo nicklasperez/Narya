@@ -23,6 +23,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/register',
     component: () => import('../views/RegisterPage.vue') // Página de registro
   },
+  {
+  path: '/perfil/:id',
+  component: () => import('../views/PerfilPublico.vue') // Vista pública de perfil de usuario
+  },
+
 
   // 🌟 Ruta principal de la app con estructura en pestañas (tabs)
   {

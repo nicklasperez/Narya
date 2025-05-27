@@ -102,7 +102,7 @@ async function crearEntrada() {
 
 <style scoped>
 .nueva-container {
-  padding: 24px;
+  padding: 40px 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -110,7 +110,7 @@ async function crearEntrada() {
 
 .nueva-title {
   font-family: 'Quicksand', sans-serif;
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #ff9ebf;
   text-shadow: 0 0 6px #ff9ebf;
   text-align: center;

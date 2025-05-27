@@ -9,6 +9,7 @@ use App\Http\Controllers\EntryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\UserController;
 
 
 // Registro y Login (Público)
@@ -42,6 +43,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/entries', [EntryController::class, 'index']);
     Route::get('/feed', [EntryController::class, 'feed']);
 
+    // Perfil de usuario
+    Route::get('/users/{id}/profile', [UserController::class, 'profile']);
+
     // Spotify — Desvincular cuenta
     Route::post('/spotify/unlink', function () {
         $user = auth()->user();
@@ -58,43 +62,42 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/spotify/search', function (Request $request) {
         $query = $request->input('q');
-        $user = auth()->user();
 
-        if (!$user->spotify_access_token || !$user->spotify_refresh_token) {
-            return response()->json(['error' => 'Usuario no tiene cuenta de Spotify vinculada.'], 400);
+        if (!$query) {
+            return response()->json(['error' => 'Missing query'], 400);
         }
 
-        // Refrescar token si ha expirado
-        if ($user->spotify_token_expires_at && now()->gte($user->spotify_token_expires_at)) {
-            $refreshResponse = Http::asForm()->post('https://accounts.spotify.com/api/token', [
-                'grant_type' => 'refresh_token',
-                'refresh_token' => $user->spotify_refresh_token,
+        $user = $request->user();
+
+        // ✅ Si el usuario tiene sesión Spotify → usar su token
+        if ($user && $user->spotify_access_token && $user->spotify_token_expires_at > now()) {
+            $accessToken = $user->spotify_access_token;
+        } else {
+            // 🔑 Token público temporal con client_credentials
+            $response = Http::asForm()->post('https://accounts.spotify.com/api/token', [
+                'grant_type' => 'client_credentials',
                 'client_id' => env('SPOTIFY_CLIENT_ID'),
                 'client_secret' => env('SPOTIFY_CLIENT_SECRET'),
             ]);
 
-            if (!$refreshResponse->ok()) {
-                return response()->json(['error' => 'Error al refrescar token de Spotify', 'details' => $refreshResponse->json()], 500);
+            if (!$response->ok()) {
+                return response()->json(['error' => 'No se pudo generar token público de Spotify'], 500);
             }
 
-            $newData = $refreshResponse->json();
-            $user->spotify_access_token = $newData['access_token'];
-            $user->spotify_token_expires_at = now()->addSeconds($newData['expires_in']);
-            $user->save();
+            $accessToken = $response->json()['access_token'];
         }
 
-        // Buscar en Spotify con token actualizado
-        $response = Http::withToken($user->spotify_access_token)
-            ->get("https://api.spotify.com/v1/search", [
-                'q' => $query,
-                'type' => 'track',
-                'limit' => 10
-            ]);
+        // 🛰️ Realizamos la búsqueda
+        $spotifyResponse = Http::withToken($accessToken)->get("https://api.spotify.com/v1/search", [
+            'q' => $query,
+            'type' => 'track',
+            'limit' => 10
+        ]);
 
-        if (!$response->ok()) {
-            return response()->json(['error' => 'Error al buscar en Spotify', 'details' => $response->json()], $response->status());
+        if (!$spotifyResponse->ok()) {
+            return response()->json(['error' => 'Error al buscar en Spotify'], $spotifyResponse->status());
         }
 
-        return $response->json();
+        return $spotifyResponse->json();
     });
 });

@@ -10,7 +10,9 @@
               <div class="entry-header">
                 <img :src="entry.user.profile_picture || 'assets/default-avatar.png'" alt="Avatar" class="avatar" />
                 <div>
-                  <p class="feed-user">{{ entry.user.username }}</p>
+                  <p class="feed-user" @click="goToProfile(entry.user.id)">
+                    {{ entry.user.username }}
+                  </p>
                   <p class="feed-date">{{ formatDate(entry.created_at) }}</p>
                 </div>
               </div>
@@ -32,9 +34,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { IonPage, IonContent } from '@ionic/vue';
+import { ref } from 'vue';
+import { IonPage, IonContent, onIonViewWillEnter } from '@ionic/vue';
 import api from '@/utils/api';
+import { useRouter } from 'vue-router';
+
 
 interface Entry {
   id: number;
@@ -44,6 +48,7 @@ interface Entry {
     name: string;
   };
   user: {
+    id: number;
     username: string;
     profile_picture?: string;
   };
@@ -64,7 +69,8 @@ function formatDate(dateStr: string) {
   });
 }
 
-onMounted(async () => {
+// ✅ Hook que se dispara cada vez que entras a esta tab
+onIonViewWillEnter(async () => {
   const token = localStorage.getItem('token');
 
   try {
@@ -75,16 +81,22 @@ onMounted(async () => {
     });
 
     feed.value = response.data.feed;
+    console.log('Feed recargado en Home 🎧');
   } catch (error) {
     console.error('Error al cargar el feed:', error);
   }
 });
+
+const router = useRouter();
+
+function goToProfile(userId: number) {
+  router.push(`/perfil/${userId}`);
+}
 </script>
 
 <style scoped>
 .home-container {
-  padding: 24px;
-  padding-top: 0;
+  padding: 40px 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -97,11 +109,11 @@ onMounted(async () => {
 
 .home-title {
   font-family: 'Quicksand', sans-serif;
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #b88cff;
   text-shadow: 0 0 6px #b88cff;
   text-align: center;
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
 .feed-list {

@@ -4,6 +4,7 @@
       <div class="ajustes-container fade-in">
         <h2 class="ajustes-title">Ajustes</h2>
 
+        <!-- Botón dinámico según si está vinculada la cuenta de Spotify -->
         <ion-button
           v-if="!spotifyLinked"
           @click="vincularSpotify"
@@ -20,6 +21,7 @@
           expand="block"
           shape="round"
           class="spotify-btn"
+          style="--background: #d24848; --box-shadow: 0 0 12px #ff5c5c;"
         >
           Desvincular cuenta Spotify
         </ion-button>
@@ -47,7 +49,7 @@ import api from '@/utils/api';
 const route = useRoute();
 const router = useRouter();
 const token = localStorage.getItem('token');
-const spotifyLinked = ref(false); // ⚡ estado dinámico
+const spotifyLinked = ref(false);
 
 function vincularSpotify() {
   if (!token) {
@@ -91,7 +93,13 @@ onMounted(async () => {
       color: 'success',
     });
     toast.present();
-    spotifyLinked.value = true;
+
+    try {
+      const response = await api.get('/user');
+      spotifyLinked.value = !!response.data.spotify_id;
+    } catch (err) {
+      console.error("Error al verificar estado Spotify tras vincular:", err);
+    }
   } else {
     try {
       const response = await api.get('/user');
@@ -121,7 +129,7 @@ onMounted(async () => {
 }
 
 .spotify-btn {
-  --background: #1db954; /* Spotify green */
+  --background: #1db954;
   --color: white;
   --box-shadow: 0 0 12px #21e065;
   margin-bottom: 16px;

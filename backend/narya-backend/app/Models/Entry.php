@@ -12,6 +12,7 @@ class Entry extends Model
         'song_name',
         'artist_name',
         'spotify_track_id',
+        'album_image',
     ];
     public function user()
     {

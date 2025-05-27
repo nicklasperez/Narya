@@ -53,7 +53,7 @@ class EntryController extends Controller
             'song_name' => 'required|string|max:255',
             'artist_name' => 'nullable|string|max:255',
             'spotify_track_id' => 'nullable|string|max:255',
-            'album_image' => 'nullable|string|max:1024', // ✅ nuevo campo validado
+            'album_image' => 'nullable|string|max:1024', // ✅ añadir esto
         ]);
 
         $entry = Entry::create([
@@ -62,7 +62,7 @@ class EntryController extends Controller
             'song_name' => $validated['song_name'],
             'artist_name' => $validated['artist_name'] ?? null,
             'spotify_track_id' => $validated['spotify_track_id'] ?? null,
-            'album_image' => $validated['album_image'] ?? null, // ✅ guardado
+            'album_image' => $validated['album_image'] ?? null, // ✅ guardar imagen
         ]);
 
         return response()->json([
