@@ -34,3 +34,49 @@ ion-input.custom-input:focus-within {
   box-shadow: 0 0 12px 2px var(--narya-neon-pink, #ff5ca2);
   background: rgba(255, 92, 162, 0.1);
 }
+
+// Estilos tabs
+
+ion-tab-bar {
+  background: rgba(0, 0, 0, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo base de botones */
+ion-tab-button {
+  --color: white;
+  --color-selected: var(--narya-neon-pink); /* fallback */
+  font-family: 'Quicksand', sans-serif;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+/* Neon por tab */
+.tab-btn-home.ion-selected {
+  --color-selected: var(--narya-neon-green);
+  border-top: 2px solid var(--narya-neon-green);
+  box-shadow: 0 -1px 10px var(--narya-neon-green);
+}
+
+.tab-btn-explora.ion-selected {
+  --color-selected: var(--narya-neon-blue);
+  border-top: 2px solid var(--narya-neon-blue);
+  box-shadow: 0 -1px 10px var(--narya-neon-blue);
+}
+
+.tab-btn-nueva.ion-selected {
+  --color-selected: var(--narya-neon-pink);
+  border-top: 2px solid var(--narya-neon-pink);
+  box-shadow: 0 -1px 10px var(--narya-neon-pink);
+}
+
+.tab-btn-graficos.ion-selected {
+  --color-selected: var(--narya-neon-red);
+  border-top: 2px solid var(--narya-neon-red);
+  box-shadow: 0 -1px 10px var(--narya-neon-red);
+}
+
+.tab-btn-ajustes.ion-selected {
+  --color-selected: var(--narya-neon-mint);
+  border-top: 2px solid var(--narya-neon-mint);
+  box-shadow: 0 -1px 10px var(--narya-neon-mint);
+}

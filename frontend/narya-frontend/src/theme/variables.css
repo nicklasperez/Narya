@@ -161,6 +161,12 @@
   transition: background 1s ease-in-out;
 }
 
+.tab-fog-fuchsia {
+  --background: radial-gradient(circle at top left, #2c003e, #120013 70%);
+  background: var(--background);
+  animation: neon-fade 14s ease-in-out infinite alternate;
+  background-blend-mode: lighter;
+}
 
 
 @keyframes neon-fade {

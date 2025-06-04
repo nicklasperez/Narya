@@ -55,7 +55,6 @@ async function handleLogin() {
     const token = response.data.token;
     localStorage.setItem('token', token);
 
-    // Verificar estado del usuario
     const userRes = await axios.get('http://localhost:8000/api/user', {
       headers: {
         Authorization: `Bearer ${token}`
@@ -63,9 +62,15 @@ async function handleLogin() {
     });
 
     const user = userRes.data;
+    console.log('[LOGIN DEBUG] Usuario autenticado:', user); // 👀
 
+    // Guardamos los datos clave
+    localStorage.setItem('user_id', user.id);
+    localStorage.setItem('username', user.username); // 🔥 ← Este es el que no se guarda
+
+    // Mostrar popup si no está vinculado a Spotify
     if (!user.spotify_id) {
-      spotifyPopupRef.value.open(); // mostrar popup si no está vinculado
+      spotifyPopupRef.value.open();
     }
 
     router.push('/tabs/home');
@@ -74,6 +79,8 @@ async function handleLogin() {
     alert('Credenciales inválidas. Intenta de nuevo.');
   }
 }
+
+
 
 function goToRegister() {
   router.push('/register');

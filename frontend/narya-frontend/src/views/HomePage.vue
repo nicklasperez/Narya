@@ -90,8 +90,9 @@ onIonViewWillEnter(async () => {
 const router = useRouter();
 
 function goToProfile(userId: number) {
-  router.push(`/perfil/${userId}`);
+  router.push(`/tabs/perfil/${userId}`);
 }
+
 </script>
 
 <style scoped>
