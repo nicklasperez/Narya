@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\StatsController;
 
 // Registro y Login (Público)
 Route::post('/register', [AuthController::class, 'register']);
@@ -38,7 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{id}/followers', [FollowController::class, 'getFollowers']);
     Route::get('/users/{id}/following', [FollowController::class, 'getFollowing']);
 
-
     // Entradas
     Route::post('/entries', [EntryController::class, 'store']);
     Route::get('/entries', [EntryController::class, 'index']);
@@ -46,6 +45,20 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Perfil de usuario
     Route::get('/users/{id}/profile', [UserController::class, 'profile']);
+
+    // Cambio de contraseña
+    Route::post('/users/change-password', [UserController::class, 'changePassword']);
+
+    // Cambio de foto de perfil
+    Route::post('/users/change-profile-picture', [UserController::class, 'changeProfilePicture']);
+
+    // Stats
+    Route::get('/stats/mood-dominante-semana', [StatsController::class, 'moodDominanteSemana']);
+    Route::get('/stats/canciones-mas-escuchadas', [StatsController::class, 'cancionesMasEscuchadas']);
+    Route::get('/stats/artistas-mas-frecuentes', [StatsController::class, 'artistasMasFrecuentes']);
+    Route::get('/stats/moods-reparto-total', [StatsController::class, 'moodsRepartoTotal']);
+
+
 
     // Spotify — Desvincular cuenta
     Route::post('/spotify/unlink', function () {
