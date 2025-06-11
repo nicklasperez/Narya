@@ -40,11 +40,12 @@ const routes: Array<RouteRecordRaw> = [
       { path: 'home', component: () => import('../views/HomePage.vue') },
       { path: 'explora', component: () => import('../views/ExploraPage.vue') },
       { path: 'nueva', component: () => import('../views/NuevaEntradaPage.vue') },
+      { path: 'explora/mood/:id', component: () => import('../views/ExploraMoodPage.vue') },
       { path: 'graficos', component: () => import('../views/GraficosPage.vue') },
       { path: 'ajustes', component: () => import('../views/AjustesPage.vue') },
       { path: 'perfil/:id', component: () => import('../views/PerfilPublico.vue') },
-      {path: '/followers/:id', component: () => import('@/views/FollowersPage.vue')},
-      {path: '/following/:id', component: () => import('@/views/FollowingPage.vue')}
+      { path: '/followers/:id', component: () => import('@/views/FollowersPage.vue')},
+      { path: '/following/:id', component: () => import('@/views/FollowingPage.vue')}
     ]
   }
 ];

@@ -93,12 +93,20 @@ async function loadMoodDominante() {
     const response = await api.get('/stats/mood-dominante-semana');
     const data = response.data;
 
-    moodData.value.labels = data.map((item: any) => item.week);
-    moodData.value.datasets[0].data = data.map((item: any) => item.count);
+    // Mostramos: Semana XX - Nombre del mood
+    moodData.value.labels = data.map((item: { week: number; mood: string; count: number }) =>
+      `Semana ${item.week.toString().slice(-2)} - ${item.mood}`
+    );
+
+    // Valores de conteo para la altura de la barra
+    moodData.value.datasets[0].data = data.map((item: { week: number; mood: string; count: number }) => item.count);
+    
   } catch (err) {
     console.error('Error cargando mood dominante:', err);
   }
 }
+
+
 
 async function loadCancionesMasEscuchadas() {
   try {

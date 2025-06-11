@@ -16,6 +16,53 @@
 }
 
 :root {
+  --mood-alegre: #FFE600;
+  --mood-triste: #1F4E79;
+  --mood-emocionado: #FF7F11;
+  --mood-nostalgico: #A67C52;
+  --mood-deprimido: #607D8B;
+  --mood-aburrido: #B0BEC5;
+  --mood-enamorado: #F48FB1;
+  --mood-ansioso: #4E5D42;
+  --mood-relajado: #A8D5BA;
+  --mood-enfadado: #D32F2F;
+  --mood-motivado: #00B0FF;
+  --mood-euforico: #FF4081;
+  --mood-melancolico: #90A4AE;
+  --mood-inspirado: #00BFA5;
+  --mood-inseguro: #D7CCC8;
+  --mood-conectado: #B39DDB;
+  --mood-esperanzado: #AED581;
+  --mood-frustrado: #8B0000;
+  --mood-solo: #B3E5FC;
+  --mood-agradecido: #FFD54F;
+}
+
+:root {
+  --neon-mood-alegre: var(--mood-alegre);
+  --neon-mood-triste: #5cecff;
+  --neon-mood-emocionado: var(--mood-emocionado);
+  --neon-mood-nostalgico: var(--mood-nostalgico);
+  --neon-mood-deprimido: #5cecff;
+  --neon-mood-aburrido: #5cecff;
+  --neon-mood-enamorado: var(--mood-enamorado);
+  --neon-mood-ansioso: #5cffbe;
+  --neon-mood-relajado: var(--mood-relajado);
+  --neon-mood-enfadado: var(--mood-enfadado);
+  --neon-mood-motivado: var(--mood-motivado);
+  --neon-mood-euforico: var(--mood-euforico);
+  --neon-mood-melancolico: #9c5cff;
+  --neon-mood-inspirado: var(--mood-inspirado);
+  --neon-mood-inseguro: #68e8f9;
+  --neon-mood-conectado: var(--mood-conectado);
+  --neon-mood-esperanzado: var(--mood-esperanzado);
+  --neon-mood-frustrado: #ff5ca2;
+  --neon-mood-solo: var(--mood-solo);
+  --neon-mood-agradecido: var(--mood-agradecido);
+}
+
+
+:root {
   --ion-font-family: 'Quicksand', sans-serif;
 }
 
@@ -85,6 +132,207 @@
   border: 1px solid var(--narya-neon-rose);
   box-shadow: 0 0 10px var(--narya-neon-rose);
   border-radius: 8px;
+}
+
+/* Moods */
+
+.neon-text-alegre {
+  color: var(--mood-alegre);
+  text-shadow: 0 0 5px var(--mood-alegre), 0 0 10px var(--mood-alegre);
+}
+
+.neon-text-triste {
+  color: var(--neon-mood-triste);
+  text-shadow: 0 0 5px var(--neon-mood-triste), 0 0 10px var(--neon-mood-triste);
+}
+
+.neon-text-emocionado {
+  color: var(--mood-emocionado);
+  text-shadow: 0 0 5px var(--mood-emocionado), 0 0 10px var(--mood-emocionado);
+}
+
+.neon-text-nostalgico {
+  color: var(--mood-nostalgico);
+  text-shadow: 0 0 5px var(--mood-nostalgico), 0 0 10px var(--mood-nostalgico);
+}
+
+.neon-text-deprimido {
+  color: var(--mood-deprimido);
+  text-shadow: 0 0 5px var(--mood-deprimido), 0 0 10px var(--mood-deprimido);
+}
+
+.neon-text-aburrido {
+  color: var(--mood-aburrido);
+  text-shadow: 0 0 5px var(--mood-aburrido), 0 0 10px var(--mood-aburrido);
+}
+
+.neon-text-enamorado {
+  color: var(--mood-enamorado);
+  text-shadow: 0 0 5px var(--mood-enamorado), 0 0 10px var(--mood-enamorado);
+}
+
+.neon-text-ansioso {
+  color: var(--mood-ansioso);
+  text-shadow: 0 0 5px var(--mood-ansioso), 0 0 10px var(--mood-ansioso);
+}
+
+.neon-text-relajado {
+  color: var(--mood-relajado);
+  text-shadow: 0 0 5px var(--mood-relajado), 0 0 10px var(--mood-relajado);
+}
+
+.neon-text-enfadado {
+  color: var(--mood-enfadado);
+  text-shadow: 0 0 5px var(--mood-enfadado), 0 0 10px var(--mood-enfadado);
+}
+
+.neon-text-motivado {
+  color: var(--mood-motivado);
+  text-shadow: 0 0 5px var(--mood-motivado), 0 0 10px var(--mood-motivado);
+}
+
+.neon-text-euforico {
+  color: var(--mood-euforico);
+  text-shadow: 0 0 5px var(--mood-euforico), 0 0 10px var(--mood-euforico);
+}
+
+.neon-text-melancolico {
+  color: var(--neon-mood-melancolico);
+  text-shadow: 0 0 5px var(--neon-mood-melancolico), 0 0 10px var(--neon-mood-melancolico);
+}
+
+.neon-text-inspirado {
+  color: var(--mood-inspirado);
+  text-shadow: 0 0 5px var(--mood-inspirado), 0 0 10px var(--mood-inspirado);
+}
+
+.neon-text-inseguro {
+  color: var(--mood-inseguro);
+  text-shadow: 0 0 5px var(--mood-inseguro), 0 0 10px var(--mood-inseguro);
+}
+
+.neon-text-conectado {
+  color: var(--mood-conectado);
+  text-shadow: 0 0 5px var(--mood-conectado), 0 0 10px var(--mood-conectado);
+}
+
+.neon-text-esperanzado {
+  color: var(--mood-esperanzado);
+  text-shadow: 0 0 5px var(--mood-esperanzado), 0 0 10px var(--mood-esperanzado);
+}
+
+.neon-text-frustrado {
+  color: var(--neon-mood-frustrado);
+  text-shadow: 0 0 5px var(--neon-mood-frustrado), 0 0 10px var(--neon-mood-frustrado);
+}
+
+.neon-text-solo {
+  color: var(--mood-solo);
+  text-shadow: 0 0 5px var(--mood-solo), 0 0 10px var(--mood-solo);
+}
+
+.neon-text-agradecido {
+  color: var(--mood-agradecido);
+  text-shadow: 0 0 5px var(--mood-agradecido), 0 0 10px var(--mood-agradecido);
+}
+.neon-text-alegre {
+  color: var(--mood-alegre);
+  text-shadow: 0 0 5px var(--mood-alegre), 0 0 10px var(--mood-alegre);
+}
+
+.neon-text-triste {
+  color: var(--mood-triste);
+  text-shadow: 0 0 5px var(--mood-triste), 0 0 10px var(--mood-triste);
+}
+
+.neon-text-emocionado {
+  color: var(--mood-emocionado);
+  text-shadow: 0 0 5px var(--mood-emocionado), 0 0 10px var(--mood-emocionado);
+}
+
+.neon-text-nostalgico {
+  color: var(--mood-nostalgico);
+  text-shadow: 0 0 5px var(--mood-nostalgico), 0 0 10px var(--mood-nostalgico);
+}
+
+.neon-text-deprimido {
+  color: var(--mood-deprimido);
+  text-shadow: 0 0 5px var(--mood-deprimido), 0 0 10px var(--mood-deprimido);
+}
+
+.neon-text-aburrido {
+  color: var(--mood-aburrido);
+  text-shadow: 0 0 5px var(--mood-aburrido), 0 0 10px var(--mood-aburrido);
+}
+
+.neon-text-enamorado {
+  color: var(--mood-enamorado);
+  text-shadow: 0 0 5px var(--mood-enamorado), 0 0 10px var(--mood-enamorado);
+}
+
+.neon-text-ansioso {
+  color: var(--neon-mood-ansioso);
+  text-shadow: 0 0 5px var(--neon-mood-ansioso), 0 0 10px var(--neon-mood-ansioso);
+}
+
+.neon-text-relajado {
+  color: var(--mood-relajado);
+  text-shadow: 0 0 5px var(--mood-relajado), 0 0 10px var(--mood-relajado);
+}
+
+.neon-text-enfadado {
+  color: var(--mood-enfadado);
+  text-shadow: 0 0 5px var(--mood-enfadado), 0 0 10px var(--mood-enfadado);
+}
+
+.neon-text-motivado {
+  color: var(--mood-motivado);
+  text-shadow: 0 0 5px var(--mood-motivado), 0 0 10px var(--mood-motivado);
+}
+
+.neon-text-euforico {
+  color: var(--mood-euforico);
+  text-shadow: 0 0 5px var(--mood-euforico), 0 0 10px var(--mood-euforico);
+}
+
+.neon-text-melancolico {
+  color: var(--mood-melancolico);
+  text-shadow: 0 0 5px var(--mood-melancolico), 0 0 10px var(--mood-melancolico);
+}
+
+.neon-text-inspirado {
+  color: var(--mood-inspirado);
+  text-shadow: 0 0 5px var(--mood-inspirado), 0 0 10px var(--mood-inspirado);
+}
+
+.neon-text-inseguro {
+  color: var(--mood-inseguro);
+  text-shadow: 0 0 5px var(--mood-inseguro), 0 0 10px var(--mood-inseguro);
+}
+
+.neon-text-conectado {
+  color: var(--mood-conectado);
+  text-shadow: 0 0 5px var(--mood-conectado), 0 0 10px var(--mood-conectado);
+}
+
+.neon-text-esperanzado {
+  color: var(--mood-esperanzado);
+  text-shadow: 0 0 5px var(--mood-esperanzado), 0 0 10px var(--mood-esperanzado);
+}
+
+.neon-text-frustrado {
+  color: var(--mood-frustrado);
+  text-shadow: 0 0 5px var(--mood-frustrado), 0 0 10px var(--mood-frustrado);
+}
+
+.neon-text-solo {
+  color: var(--mood-solo);
+  text-shadow: 0 0 5px var(--mood-solo), 0 0 10px var(--mood-solo);
+}
+
+.neon-text-agradecido {
+  color: var(--mood-agradecido);
+  text-shadow: 0 0 5px var(--mood-agradecido), 0 0 10px var(--mood-agradecido);
 }
 
 

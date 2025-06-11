@@ -11,16 +11,20 @@ class EntryController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $entries = Entry::where('user_id', $request->user()->id)
-            ->with('mood')
-            ->orderBy('created_at', 'desc')
-            ->get();
+{
+    $entries = Entry::where('user_id', $request->user()->id)
+        ->when($request->mood_id, function ($query, $moodId) {
+            return $query->where('mood_id', $moodId);
+        })
+        ->with('mood')
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        return response()->json([
-            'entries' => $entries
-        ]);
-    }
+    return response()->json([
+        'entries' => $entries
+    ]);
+}
+
 
     public function feed(Request $request)
     {
