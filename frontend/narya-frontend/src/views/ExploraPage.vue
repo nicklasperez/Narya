@@ -2,8 +2,37 @@
   <ion-page>
     <ion-content class="tab-bg-explora fade-in" fullscreen>
       <div class="explora-container">
+        
+        <!-- Título -->
         <h2 class="explora-title">🎧 Explora por mood</h2>
 
+        <!-- 🔍 Buscador de usuarios -->
+        <input
+          v-model="searchQuery"
+          @input="buscarUsuarios"
+          placeholder="Buscar usuarios..."
+          class="search-bar"
+        />
+
+        <!-- Resultados de usuarios -->
+        <div v-if="usuariosEncontrados.length > 0" class="user-results">
+          <div
+            v-for="user in usuariosEncontrados"
+            :key="user.id"
+            class="user-card neon-border"
+            @click="goToProfile(user.id)"
+          >
+            <img :src="user.profile_picture" class="avatar" />
+            <div class="user-info">
+              <p class="username">@{{ user.username }}</p>
+              <p class="name">{{ user.name }} {{ user.surname }}</p>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <!-- Moods -->
         <div class="moods-grid">
           <div
             v-for="mood in moods"
@@ -17,6 +46,7 @@
             </span>
           </div>
         </div>
+
       </div>
     </ion-content>
   </ion-page>
@@ -28,8 +58,20 @@ import { ref, onMounted } from 'vue';
 import api from '@/utils/api';
 import { useRouter } from 'vue-router';
 
+interface Usuario {
+  id: number;
+  username: string;
+  name: string;
+  surname: string;
+  profile_picture: string;
+}
+
+const usuariosEncontrados = ref<Usuario[]>([]);
 const router = useRouter();
+
 const moods = ref<{ id: number; name: string; color: string }[]>([]);
+const searchQuery = ref('');
+
 
 onMounted(async () => {
   try {
@@ -40,17 +82,30 @@ onMounted(async () => {
   }
 });
 
+async function buscarUsuarios() {
+  if (searchQuery.value.trim().length < 2) {
+    usuariosEncontrados.value = [];
+    return;
+  }
+
+  try {
+    const res = await api.get(`/search-users?query=${searchQuery.value}`);
+    usuariosEncontrados.value = res.data;
+  } catch (error) {
+    console.error('Error buscando usuarios', error);
+  }
+}
+
 function goToMood(moodId: number) {
   router.push(`/tabs/explora/mood/${moodId}`);
 }
 
-// Función para convertir el name del mood en slug compatible con clase CSS
+function goToProfile(userId: number) {
+  router.push(`/tabs/perfil-publico/${userId}`);
+}
+
 function slugifyMood(name: string): string {
-  return name
-    .normalize('NFD') // quita acentos
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/\s+/g, ''); // quita espacios (por si acaso)
+  return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, '');
 }
 </script>
 
@@ -59,6 +114,56 @@ function slugifyMood(name: string): string {
   display: flex;
   flex-direction: column;
   padding: 24px;
+}
+
+.search-bar {
+  width: 90%;
+  margin: 16px auto;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  box-shadow: 0 0 5px #00f0ff;
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.user-results {
+  padding: 0 16px;
+  margin-bottom: 24px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.user-card:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info .username {
+  font-weight: bold;
+  color: #00f0ff;
+  font-size: 1rem;
+}
+
+.user-info .name {
+  font-size: 0.9rem;
+  color: #ccc;
 }
 
 .explora-title {

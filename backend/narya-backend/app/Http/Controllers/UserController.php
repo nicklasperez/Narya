@@ -109,4 +109,17 @@ class UserController extends Controller
             'profile_picture' => asset(Storage::url($path)),
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $users = User::where('username', 'like', "%$query%")
+            ->orWhere('name', 'like', "%$query%")
+            ->orWhere('surname', 'like', "%$query%")
+            ->get(['id', 'username', 'name', 'surname', 'profile_picture']);
+
+        return response()->json($users);
+    }
+
 }

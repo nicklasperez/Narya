@@ -58,6 +58,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/stats/artistas-mas-frecuentes', [StatsController::class, 'artistasMasFrecuentes']);
     Route::get('/stats/moods-reparto-total', [StatsController::class, 'moodsRepartoTotal']);
 
+    // Buscar usuarios
+    Route::get('/search-users', [UserController::class, 'search']);
 
 
     // Spotify — Desvincular cuenta

@@ -4,66 +4,82 @@
       <div class="register-container">
         <h2 class="register-title">Crea tu cuenta</h2>
 
-        <ion-input
-          v-model="form.username"
-          placeholder="Nombre de usuario"
-          type="text"
-          class="custom-input"
-        ></ion-input>
+        <!-- Campo: Nombre de usuario -->
+        <ion-input v-model="form.username" placeholder="Nombre de usuario" type="text" class="custom-input" />
+        <ion-text color="danger" v-if="errors.username">
+          <ul>
+            <li v-for="e in errors.username" :key="e">{{ e }}</li>
+          </ul>
+        </ion-text>
 
-        <ion-input
-          v-model="form.name"
-          placeholder="Nombre"
-          type="text"
-          class="custom-input"
-        ></ion-input>
+        <!-- Campo: Nombre -->
+        <ion-input v-model="form.name" placeholder="Nombre" type="text" class="custom-input" />
+        <ion-text color="danger" v-if="errors.name">
+          <ul>
+            <li v-for="e in errors.name" :key="e">{{ e }}</li>
+          </ul>
+        </ion-text>
 
-        <ion-input
-          v-model="form.surname"
-          placeholder="Apellido (opcional)"
-          type="text"
-          class="custom-input"
-        ></ion-input>
+        <!-- Campo: Apellido -->
+        <ion-input v-model="form.surname" placeholder="Apellido (opcional)" type="text" class="custom-input" />
+        <ion-text color="danger" v-if="errors.surname">
+          <ul>
+            <li v-for="e in errors.surname" :key="e">{{ e }}</li>
+          </ul>
+        </ion-text>
 
-        <ion-input
-          v-model="form.birthdate"
-          placeholder="Fecha de nacimiento"
-          type="date"
-          class="custom-input"
-        ></ion-input>
+        <!-- Campo: Fecha de nacimiento -->
+        <ion-input v-model="form.birthdate" placeholder="Fecha de nacimiento" type="date" class="custom-input" />
+        <ion-text color="danger" v-if="errors.birthdate">
+          <ul>
+            <li v-for="e in errors.birthdate" :key="e">{{ e }}</li>
+          </ul>
+        </ion-text>
 
-        <ion-input
-          v-model="form.email"
-          placeholder="Correo electrónico"
-          type="email"
-          class="custom-input"
-        ></ion-input>
+        <!-- Campo: Email -->
+        <ion-input v-model="form.email" placeholder="Correo electrónico" type="email" class="custom-input" />
+        <ion-text color="danger" v-if="errors.email">
+          <ul>
+            <li v-for="e in errors.email" :key="e">{{ e }}</li>
+          </ul>
+        </ion-text>
 
-        <ion-input
-          v-model="form.password"
-          placeholder="Contraseña"
-          type="password"
-          class="custom-input"
-        ></ion-input>
+        <!-- Campo: Contraseña -->
+        <ion-input v-model="form.password" placeholder="Contraseña" type="password" class="custom-input" />
+        <ion-text color="danger" v-if="errors.password">
+          <ul>
+            <li v-for="e in errors.password" :key="e">{{ e }}</li>
+          </ul>
+        </ion-text>
 
-        <ion-input
-          v-model="form.password_confirmation"
-          placeholder="Confirmar contraseña"
-          type="password"
-          class="custom-input"
-        ></ion-input>
+        <!-- Campo: Confirmar contraseña -->
+        <ion-input v-model="form.password_confirmation" placeholder="Confirmar contraseña" type="password"
+          class="custom-input" />
+        <ion-text color="danger" v-if="errors.password_confirmation">
+          <ul>
+            <li v-for="e in errors.password_confirmation" :key="e">{{ e }}</li>
+          </ul>
+        </ion-text>
 
+        <ion-text>
+          La contraseña debe contener:<br>
+          - Al menos 8 caracteres<br>
+          - Al menos una letra mayúscula, una minúscula y un número
+        </ion-text>
+
+        <!-- Botón de registro -->
         <ion-button expand="block" shape="round" class="register-button" @click="handleRegister">
           Registrarse
         </ion-button>
 
+        <!-- Link de redirección al login -->
         <ion-text color="white" class="redirect-text">
-          ¿Ya tienes cuenta? --- 
+          ¿Ya tienes cuenta? ---
           <a @click="goToLogin">Iniciar sesión</a>
         </ion-text>
       </div>
 
-      <!-- Popup de Spotify -->
+      <!-- Componente para vincular Spotify si no está vinculado -->
       <SpotifyPopup ref="spotifyPopupRef" />
     </ion-content>
   </ion-page>
@@ -71,7 +87,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { IonPage, IonContent, IonInput, IonButton, IonText } from '@ionic/vue';
+import { IonPage, IonContent, IonInput, IonButton, IonText, IonList, IonItem } from '@ionic/vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import SpotifyPopup from '@/components/SpotifyPopup.vue';
@@ -79,6 +95,7 @@ import SpotifyPopup from '@/components/SpotifyPopup.vue';
 const router = useRouter();
 const spotifyPopupRef = ref();
 
+// Formulario de datos del usuario
 const form = ref({
   username: '',
   name: '',
@@ -89,13 +106,19 @@ const form = ref({
   password_confirmation: ''
 });
 
+// Objeto reactivo para guardar errores de validación (por campo)
+const errors = ref<{ [key: string]: string[] }>({});
+
+// Función para manejar el registro
 async function handleRegister() {
   try {
+    // Enviar datos al backend Laravel
     const response = await axios.post('http://localhost:8000/api/register', form.value);
     const token = response.data.token;
 
     localStorage.setItem('token', token);
 
+    // Obtener datos del usuario una vez registrado
     const userRes = await axios.get('http://localhost:8000/api/user', {
       headers: {
         Authorization: `Bearer ${token}`
@@ -104,17 +127,25 @@ async function handleRegister() {
 
     const user = userRes.data;
 
+    // Si no está vinculado con Spotify, mostrar popup
     if (!user.spotify_id) {
-      spotifyPopupRef.value.open(); // mostrar popup si no está vinculado
+      spotifyPopupRef.value.open();
     }
 
+    // Redirigir a Home
     router.push('/tabs/home');
-  } catch (error) {
-    console.error(error);
-    alert('Error al registrar. Verifica tus datos.');
+  } catch (error: any) {
+    // Si hay errores de validación (código 422), mostrarlos en pantalla
+    if (error.response && error.response.status === 422) {
+      errors.value = error.response.data.errors;
+    } else {
+      console.error(error);
+      alert('Error al registrar. Verifica tus datos.');
+    }
   }
 }
 
+// Navegar a la vista de login
 function goToLogin() {
   router.push('/login');
 }
@@ -188,5 +219,12 @@ ion-input.custom-input::part(native)::placeholder {
   text-decoration: underline;
   cursor: pointer;
 }
-</style>
 
+/* Estilo para errores debajo de inputs */
+ion-text[color="danger"] {
+  margin: -12px 0 12px 0;
+  font-size: 0.85rem;
+  color: #ff6b6b;
+  text-align: center;
+}
+</style>

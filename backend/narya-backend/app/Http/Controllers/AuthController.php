@@ -16,7 +16,16 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'surname' => 'nullable|string|max:255',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[a-z]/',      // al menos una minúscula
+                'regex:/[A-Z]/',      // al menos una mayúscula
+                'regex:/[0-9]/',      // al menos un número
+                'regex:/[@$!%*#?&]/', // al menos un símbolo
+            ],
             'birthdate' => 'nullable|date',
             'profile_picture' => 'nullable|url',
         ]);

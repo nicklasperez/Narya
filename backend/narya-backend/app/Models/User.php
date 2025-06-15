@@ -88,4 +88,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
+
+    protected static function booted(): void
+    {
+        static::creating(function ($user) {
+            if (empty($user->profile_picture)) {
+                $user->profile_picture = config('app.url') . '/assets/default-avatar.png';
+            }
+        });
+    }
+
+
 }
