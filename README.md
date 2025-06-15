@@ -67,16 +67,25 @@ Abre en el navegador:
 http://localhost:8100
 
 🔑 Usuarios de prueba (base de datos semilla)
-Usuario	Email	Contraseña
+
 Nicklas	nicklas@example.com	Password123!
+
 María	maria@example.com	Password123!
+
 Javier	javi@example.com	Password123!
+
 Laura	laura@example.com	Password123!
+
 José	pepe@example.com	Password123!
+
 Jose Luis	jose@example.com	Password123!
+
 Santiago	santiago@example.com	Password123!
+
 Rocío	rocio@example.com	Password123!
+
 Jose Alberto	jalberto@example.com	Password123!
+
 Bernardo	bernardo@example.com	Password123!
 
 ✨ Funcionalidades principales
