@@ -119,7 +119,7 @@ Transiciones suaves y colores según estado de ánimo
 Nicklas Stæhr Pérez
 Proyecto Integrado – Digitech FP
 Junio 2025
-GitHub: @tu_usuario
+GitHub: @nicklasperez
 
 📄 Licencia
 Este proyecto es de uso educativo.
