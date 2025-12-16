@@ -1,72 +1,84 @@
-# 🎶 NARYA – Red Social Musical Emocional
+# 🎶 NARYA – Musical Emotional Social Media
 
-**NARYA** es una aplicación multiplataforma donde los usuarios comparten su estado emocional junto a la música que escuchan, y conectan con otros a través de estados de ánimo similares.  
-Desarrollada con **Laravel (backend)** e **Ionic + Vue (frontend)**, integra la API de **Spotify** para vincular cuentas y buscar canciones.
+**NARYA** is a cross-platform application where users share their emotional state along with the music they listen to, and connect with others through similar moods.  
+Developed with **Laravel (backend)** and **Ionic + Vue (frontend)**, it integrates the **Spotify** API to link accounts and search for songs.
 
 ---
 
-## 🧠 Requisitos Previos
+## 🧠 Prerequisites
 
 - PHP ≥ 8.1  
 - Composer  
 - Node.js ≥ 18  
 - MySQL  
 - Git  
-- Una cuenta de Spotify Developer  
+- Spotify Developer Account  
 
 ---
 
-## 🛠 Instalación
+## 🛠 Instalation
 
 ### 🔹 Backend (Laravel)
 
-1. Clona el repositorio:
+1. Clone the Repository
 
    git clone https://github.com/tu_usuario/narya.git
    cd narya
    
-Instala las dependencias de Laravel:
-composer install
+2. Install Laravel Dependencies:
 
-Crea el archivo .env:
-cp .env.example .env
+   composer install
 
-Genera la clave de la app:
-php artisan key:generate
+3. Create .env:
 
-Configura la base de datos:
+   cp .env.example .env
 
-Asegúrate de tener una base de datos llamada narya y luego edita tu .env:
-DB_DATABASE=narya
-DB_USERNAME=root
-DB_PASSWORD=****
+4. Generate the app key:
 
-Agrega las claves de Spotify:
-Solicítalas al autor del proyecto o crea una app en Spotify Developer:
-SPOTIFY_CLIENT_ID=🔒
-SPOTIFY_CLIENT_SECRET=🔒
-SPOTIFY_REDIRECT_URI=http://127.0.0.1:8000/api/spotify/callback
+   php artisan key:generate
 
-Ejecuta migraciones y seeders:
-php artisan migrate --seed
+5. Configure the DB:
 
-Inicia el servidor de Laravel:
-php artisan serve
+   Make sure you have a database named narya, then edit your .env:
+   DB_DATABASE=narya
+   DB_USERNAME=root
+   DB_PASSWORD=****
+
+6. Add the Spotify credentials:
+
+   Request them from the project author or create an app in Spotify Developer:
+   SPOTIFY_CLIENT_ID=🔒
+   SPOTIFY_CLIENT_SECRET=🔒
+   SPOTIFY_REDIRECT_URI=http://127.0.0.1:8000/api/spotify/callback
+
+7. Run migrations and seeders:
+
+   php artisan migrate --seed
+
+8. Initialize the Laravel Server:
+
+   php artisan serve
+
 🔹 Frontend (Ionic + Vue)
 
-Entra a la carpeta del frontend:
-cd narya-frontend
+1. Enter the frontend folder:
 
-Instala dependencias:
-npm install
+   cd narya-frontend
 
-Inicia la app:
-npm run dev
+2. Install Dependencies:
 
-Abre en el navegador:
-http://localhost:8100
+   npm install
 
-🔑 Usuarios de prueba (base de datos semilla)
+3. Start the APP:
+
+   npm run dev
+
+4. Open your browser:
+
+   http://localhost:8100
+
+
+🔑 Test Users (Seeded DB)
 
 Nicklas	nicklas@example.com	Password123!
 
@@ -88,39 +100,47 @@ Jose Alberto	jalberto@example.com	Password123!
 
 Bernardo	bernardo@example.com	Password123!
 
-✨ Funcionalidades principales
-✅ Registro seguro con validación avanzada
 
-🎧 Vinculación con cuenta Spotify
+✨ Main Functionalities:
 
-🧠 Feed emocional según estado de ánimo
+✅ Secure registration with advanced validation
 
-🔎 Buscador de usuarios
+🎧 Spotify account linking
 
-📊 Gráficos estadísticos por usuario
+🧠 Mood-based emotional feed
 
-🧍‍♂️ Perfiles públicos
+🔎 User search
 
-🔁 Gestión de seguidores / seguidos
+📊 User statistical charts
 
-🌈 Colores y estilos por mood musical
+🧍‍♂️ Public profiles
 
-🎨 Estética y estilo
+🔁 Followers / following management
 
-Estética Lo-fi + neón
+🌈 Mood-based colors and styles
 
-Interfaz en dark-mode por defecto
+🎨 Aesthetic and style
 
-Visual minimalista y emocional
+Lo-fi + neon aesthetic
 
-Transiciones suaves y colores según estado de ánimo
+Dark-mode interface by default
 
-👨‍💻 Autor
+Minimalistic and emotional visual design
+
+Smooth transitions and mood-based colors
+
+👨‍💻 Author
 Nicklas Stæhr Pérez
-Proyecto Integrado – Digitech FP
-Junio 2025
+
+Final Integrated Project – Digitech FP
+
+June 2025
+
 GitHub: @nicklasperez
 
-📄 Licencia
-Este proyecto es de uso educativo.
-Para cualquier otro uso, contactar previamente con el autor.
+📄 License
+
+This project is for educational use.
+
+For any other use, please contact the author in advance.
+
